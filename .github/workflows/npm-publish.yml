@@ -3,14 +3,6 @@ name: Playwright Tests
 on:
   workflow_dispatch:
     inputs:
-      user_name:
-        description: 'Enter the username'
-        required: true
-        type: string
-      password:
-        description: 'Enter the password'
-        required: true
-        type: string
       course:
         description: 'Enter the course name'
         required: true
@@ -22,11 +14,12 @@ on:
       timeout:
         description: 'Enter the timeout in milliseconds'
         required: false
-        default: '600000' # Default to 60 seconds
-
+        default: '60000'
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -39,10 +32,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         env:
-          USER_NAME: ${{ github.event.inputs.user_name }}
-          PASSWORD: ${{ github.event.inputs.password }}
+          USER_NAME: ${{ secrets.USER_NAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
           COURSE: ${{ github.event.inputs.course }}
           MODULE: ${{ github.event.inputs.module }}
           TIMEOUT: ${{ github.event.inputs.timeout }}

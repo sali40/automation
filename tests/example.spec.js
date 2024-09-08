@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 const timeout = process.env.TIMEOUT;
-const user_name=process.env.USER_NAME
+const user_name=process.env.USERNAME
 const password = process.env.PASSWORD
 const course = process.env.COURSE
 const module = process.env.MODULE
