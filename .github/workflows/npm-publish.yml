@@ -39,6 +39,8 @@ jobs:
         env:
           USER_NAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          URL: ${{ secrets.URL }}
+          
           COURSE: ${{ github.event.inputs.course }}
           MODULE: ${{ github.event.inputs.module }}
           TIMEOUT: ${{ github.event.inputs.timeout }}
