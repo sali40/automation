@@ -6,10 +6,13 @@ const course = process.env.COURSE
 const module = process.env.MODULE
 const amityonline = 'https://amigo.amityonline.com/login/index.php'
 
+let iteration = 0;
 
 const navigateToNextActivity = async (page) => {
   let nextActivityLink = page.locator('a:has-text("Next Activity")');
+  
   while (await nextActivityLink.count() > 0) {
+    console.log('completed itrations :'+iteration)
     await nextActivityLink.waitFor({ state: 'visible', timeout: timeout });
     await Promise.all([
       nextActivityLink.click(),
@@ -32,6 +35,7 @@ const navigateToNextActivity = async (page) => {
 
     nextActivityLink = page.locator('a:has-text("Next Activity")');
   }
+
 };
 
 test('test', async ({ page }) => {
