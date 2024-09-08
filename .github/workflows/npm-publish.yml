@@ -22,7 +22,7 @@ on:
       timeout:
         description: 'Enter the timeout in milliseconds'
         required: false
-        default: '60000' # Default to 60 seconds
+        default: '600000' # Default to 60 seconds
 
 jobs:
   test:

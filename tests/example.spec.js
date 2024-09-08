@@ -1,9 +1,9 @@
-import { test, expect,defineConfig  } from '@playwright/test';
-const timeout = 60_0000;
+import { test } from '@playwright/test';
+const timeout = process.env.TIMEOUT;
 const user_name=process.env.USER_NAME
 const password = process.env.PASSWORD
-const course = 'Course name Green computing ('
-const module = 'Module 3';
+const course = process.env.COURSE
+const module = process.env.MODULE
 const amityonline = 'https://amigo.amityonline.com/login/index.php'
 
 
