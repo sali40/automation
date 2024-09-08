@@ -1,0 +1,54 @@
+name: Playwright Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_name:
+        description: 'Enter the username'
+        required: true
+        type: string
+      password:
+        description: 'Enter the password'
+        required: true
+        type: string
+      course:
+        description: 'Enter the course name'
+        required: true
+        type: string
+      module:
+        description: 'Enter the module name'
+        required: true
+        type: string
+      timeout:
+        description: 'Enter the timeout in milliseconds'
+        required: false
+        default: '60000' # Default to 60 seconds
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]  # Specify the Node.js version
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Playwright tests
+        env:
+          USER_NAME: ${{ github.event.inputs.user_name }}
+          PASSWORD: ${{ github.event.inputs.password }}
+          COURSE: ${{ github.event.inputs.course }}
+          MODULE: ${{ github.event.inputs.module }}
+          TIMEOUT: ${{ github.event.inputs.timeout }}
+        run: npx playwright test
