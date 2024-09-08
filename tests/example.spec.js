@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-const timeout = process.env.TIMEOUT;
-const user_name=process.env.USERNAME
+const timeout = 60000;
+const user_name=process.env.USER_NAME
 const password = process.env.PASSWORD
 const course = process.env.COURSE
 const module = process.env.MODULE
@@ -39,12 +39,19 @@ const navigateToNextActivity = async (page) => {
 };
 
 test('test', async ({ page }) => {
+  console.log(user_name);
+  console.log(password);
+  console.log(user_name);
+  console.log(course);
+  console.log(module);
+  
   test.setTimeout(timeout);
 
   await page.goto(amityonline);
   await page.screenshot({ path: 'final_screenshot.png', fullPage: true });
   await page.getByPlaceholder('Username').fill(user_name);
   await page.getByPlaceholder('Password').fill(password);
+  await page.screenshot({ path: 'final_screenshot.png', fullPage: true });
   await page.getByRole('button', { name: 'Log in' }).click();
 
   await page.getByRole('link', { name: course }).click();
