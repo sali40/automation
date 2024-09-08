@@ -38,6 +38,7 @@ test('test', async ({ page }) => {
   test.setTimeout(timeout);
 
   await page.goto(amityonline);
+  await page.screenshot({ path: 'final_screenshot.png', fullPage: true });
   await page.getByPlaceholder('Username').fill(user_name);
   await page.getByPlaceholder('Password').fill(password);
   await page.getByRole('button', { name: 'Log in' }).click();
