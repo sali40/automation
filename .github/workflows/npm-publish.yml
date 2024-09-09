@@ -9,6 +9,7 @@ on:
         type: choice
         options:
           - 'Course name Green computing'
+          - 'Computational Statistics'
       module:
         description: 'Select the module name'
         required: true

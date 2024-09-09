@@ -25,7 +25,7 @@ const navigateToNextActivity = async (page) => {
 
       const startAttemptButton = page.getByRole('button', { name: 'Start attempt' });
       if (await startAttemptButton.isVisible()) {
-        await page.screenshot({ path: 'start_attempt_modal.png', fullPage: true });
+        await page.screenshot({ path: 'screenshots/start_attempt_modal.png', fullPage: true });
         console.log('Start attempt modal found. Screenshot taken.');
         return;
       }
