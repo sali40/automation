@@ -30,12 +30,26 @@ const navigateToNextActivity = async (page) => {
         return;
       }
       
+
       const answer1Locator1 = page.locator('[id*="_answer1_label"]').nth(0);
+      if (await answer1Locator1.isVisible()) {
+        await answer1Locator1.getByText('b.').click();
+        console.log('First answer clicked');
+      } else {
+        console.log('First answer not found, skipping');
+      }
+
       const answer1Locator2 = page.locator('[id*="_answer1_label"]').nth(1);
-      
-      await answer1Locator1.getByText('b.').click();
-      await answer1Locator2.getByText('b.').click();
-      
+
+      // Conditionally check if the second answer locator exists before interacting
+      if (await answer1Locator2.count() > 0 && await answer1Locator2.isVisible()) {
+        await answer1Locator2.getByText('b.').click();
+        console.log('Second answer clicked');
+      } else {
+        console.log('Second answer not found, skipping');
+      }
+
+
       await page.getByRole('button', { name: 'Finish attempt' }).click();
       await page.getByRole('button', { name: 'Submit all and finish' }).click();
       
