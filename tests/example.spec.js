@@ -66,6 +66,47 @@ const navigateToNextActivity = async (page) => {
   }
 };
 
+
+
+async function tryClickCardWithFallback(page) {
+  const firstCard = page.locator('.single-card').nth(0).locator('div').first();
+  const secondCard = page.locator('.single-card').nth(1).locator('div').first();
+
+  // Helper function to check if the page has navigated successfully
+  async function didNavigate() {
+    try {
+      // Adjust this condition based on your expected navigation outcome
+      // For example, you can wait for a specific element or URL change
+      await page.waitForLoadState('networkidle', { timeout: 5000 });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Try clicking the first card
+  console.log('Clicking the first card...');
+  await firstCard.click();
+
+  // Check if the first click worked
+  if (await didNavigate()) {
+    console.log('Successfully navigated after clicking the first card.');
+    return; // Exit if successful
+  }
+
+  // Fallback: Try clicking the second card if the first one didn't work
+  console.log('First card did not navigate. Clicking the second card...');
+  await secondCard.click();
+
+  // Check if the second click worked
+  if (await didNavigate()) {
+    console.log('Successfully navigated after clicking the second card.');
+  } else {
+    console.log('Second card did not work either.');
+  }
+}
+
+
 test('test', async ({ page }) => {
   test.setTimeout(timeout);
 
@@ -79,8 +120,10 @@ test('test', async ({ page }) => {
   await page.getByRole('link', { name: COURSE }).click();
   await page.getByRole('link', { name: MODULE }).click();
 
-  const initDiv = page.locator('.single-card').nth(1).locator('div').first();
-  await initDiv.click();
+  // const initDiv = page.locator('.single-card').nth(0).locator('div').first();
+  // await initDiv.click();
+
+  await tryClickCardWithFallback(page);
 
   await navigateToNextActivity(page);
 

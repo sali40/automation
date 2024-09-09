@@ -10,6 +10,10 @@ on:
         options:
           - 'Course name Green computing'
           - 'Course name Computational Statistics'
+          - 'Course name Introduction to Data Base Management Systems'
+          - 'Course name Object Oriented Programming Using Java'
+          - 'Course name Network Basics'
+          
       module:
         description: 'Select the module name'
         required: true
