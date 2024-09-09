@@ -22,6 +22,14 @@ const navigateToNextActivity = async (page) => {
 
     if (await page.getByRole('button', { name: 'Attempt quiz' }).isVisible()) {
       await page.getByRole('button', { name: 'Attempt quiz' }).click();
+
+      const startAttemptButton = page.getByRole('button', { name: 'Start attempt' });
+      if (await startAttemptButton.isVisible()) {
+        await page.screenshot({ path: 'start_attempt_modal.png', fullPage: true });
+        console.log('Start attempt modal found. Screenshot taken.');
+        return;
+      }
+      
       const answer1Locator1 = page.locator('[id*="_answer1_label"]').nth(0);
       const answer1Locator2 = page.locator('[id*="_answer1_label"]').nth(1);
       
