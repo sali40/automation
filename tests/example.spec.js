@@ -69,9 +69,7 @@ const navigateToNextActivity = async (page) => {
 
 
 async function tryClickCardWithFallback(page) {
-  const firstCard = page.locator('.single-card').nth(1).locator('div').first();
-  const secondCard = page.locator('.single-card').nth(0).locator('div').first();
-
+  const firstCard = page.locator('.single-card').nth(COURSE==='Course name Computational Statistics' ? 0 :1).locator('div').first();
   // Helper function to check if the page has navigated successfully
   async function didNavigate() {
     try {
