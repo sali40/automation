@@ -6,11 +6,19 @@ on:
       course:
         description: 'Enter the course name'
         required: true
-        type: string
+        type: choice
+        options:
+          - 'Course name Green computing'
       module:
-        description: 'Enter the module name'
+        description: 'Select the module name'
         required: true
-        type: string
+        type: choice
+        options:
+          - 'Module 1'
+          - 'Module 2'
+          - 'Module 3'
+          - 'Module 4'
+          - 'Module 5'
       timeout:
         description: 'Enter the timeout in milliseconds'
         required: false

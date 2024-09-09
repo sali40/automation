@@ -56,10 +56,10 @@ test('test', async ({ page }) => {
   test.setTimeout(timeout);
 
   await page.goto(URL);
-  await page.screenshot({ path: 'final_screenshot.png', fullPage: true });
+  await page.screenshot({ path: 'screenshots/initial.png', fullPage: true });
   await page.getByPlaceholder('Username').fill(USER_NAME);
   await page.getByPlaceholder('Password').fill(PASSWORD);
-  await page.screenshot({ path: 'final_screenshot.png', fullPage: true });
+  await page.screenshot({ path: 'screenshots/login.png', fullPage: true });
   await page.getByRole('button', { name: 'Log in' }).click();
 
   await page.getByRole('link', { name: COURSE }).click();
@@ -70,5 +70,5 @@ test('test', async ({ page }) => {
 
   await navigateToNextActivity(page);
 
-  await page.screenshot({ path: 'final_screenshot.png', fullPage: true });
+  await page.screenshot({ path: 'screenshots/final_screenshot.png', fullPage: true });
 });
