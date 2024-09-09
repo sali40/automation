@@ -1,10 +1,10 @@
 import { test } from '@playwright/test';
-const timeout = 60000;
-const user_name=process.env.USER_NAME
-const password = process.env.PASSWORD
-const course = process.env.COURSE
-const module = process.env.MODULE
-const amityonline = process.env.URL
+const timeout = 600000;
+const USER_NAME=process.env.USER_NAME
+const PASSWORD = process.env.PASSWORD
+const COURSE = process.env.COURSE
+const MODULE = process.env.MODULE
+const URL = process.env.URL
 
 let iteration = 0;
 
@@ -40,25 +40,20 @@ const navigateToNextActivity = async (page) => {
 };
 
 test('test', async ({ page }) => {
-  console.log(user_name);
-  console.log(password);
-  console.log(user_name);
-  console.log(course);
-  console.log(module);
+  
   
   test.setTimeout(timeout);
 
-  await page.goto(amityonline);
+  await page.goto(URL);
   await page.screenshot({ path: 'final_screenshot.png', fullPage: true });
-  await page.getByPlaceholder('Username').fill(user_name);
-  await page.getByPlaceholder('Password').fill(password);
+  await page.getByPlaceholder('Username').fill(USER_NAME);
+  await page.getByPlaceholder('Password').fill(PASSWORD);
   await page.screenshot({ path: 'final_screenshot.png', fullPage: true });
   await page.getByRole('button', { name: 'Log in' }).click();
 
-  await page.getByRole('link', { name: course }).click();
-  // await page.getByRole('link', { name: module }).click();
-  await page.getByRole('link', { name: module }).click();
-  // await page.getByRole('link', { name: start }).click();
+  await page.getByRole('link', { name: COURSE }).click();
+  await page.getByRole('link', { name: MODULE }).click();
+
 
   const initDiv = page.locator('.single-card').nth(1).locator('div').first();
   await initDiv.click();
